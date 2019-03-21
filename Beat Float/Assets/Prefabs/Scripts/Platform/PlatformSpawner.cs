@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
+    public float bpm = 120f;
+    private float lastTime, deltaTime, timer;
+
+
     public GameObject platformPrefab;
     private GameObject platform;
 
@@ -14,19 +18,32 @@ public class PlatformSpawner : MonoBehaviour
 
     void Start()
     {
-        SpawnPlatform();
+        lastTime = 0f;
+        deltaTime = 0f;
+        timer = 0f;
+        //SpawnPlatform();
     }
 
     // Update is called once per frame
     void Update()
     {
-        t += Time.deltaTime;
-        Debug.Log(t);
-        if (t >= spawnTime)
+        deltaTime = GetComponent<AudioSource>().time - lastTime;
+        timer += deltaTime;
+
+        if(timer>= (60f/bpm))
         {
-            t = 0;
             SpawnPlatform();
+            timer = 0;
         }
+
+        lastTime = GetComponent<AudioSource>().time;
+        //t += Time.deltaTime;
+        //Debug.Log(t);
+        //if (t >= spawnTime)
+        //{
+        //    t = 0;
+        //    SpawnPlatform();
+        //}
     }
     private void SpawnPlatform()
     {
