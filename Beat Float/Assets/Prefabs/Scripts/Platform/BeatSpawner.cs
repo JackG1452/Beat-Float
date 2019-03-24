@@ -23,9 +23,9 @@ public class BeatSpawner : MonoBehaviour
         float randomX = Random.Range(-5, 5);
         //compute instant sound energy
         float[] channelRight = new float[256]; //= song.GetSpectrumData(1024, 1, FFTWindow.Hamming);
-       // float[] channelLeft = new float[256]; //= song.GetSpectrumData(1024, 2, FFTWindow.Hamming);
-
+                                               // float[] channelLeft = new float[256]; //= song.GetSpectrumData(1024, 2, FFTWindow.Hamming);
         song.GetSpectrumData(channelRight, 0, FFTWindow.Hamming);
+      //  song.volume = 0;
        // song.GetSpectrumData(channelLeft, 0, FFTWindow.Hamming);
         float e = sumStereo(channelRight);
 
