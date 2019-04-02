@@ -7,6 +7,7 @@ public class PlaySong : MonoBehaviour
     private float timeElapsed;
     private AudioSource song;
     private bool play = false;
+    public Rigidbody ball;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class PlaySong : MonoBehaviour
         {
             song.Play();
             play = true;
+            ball.isKinematic = false;
         }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8409497337753005205}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,5 +105,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  startPos: {x: 0, y: -0.25, z: 20}
   endPosZ: -10

@@ -49,5 +49,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         //instantiate
         platform = Instantiate(platformPrefab, startPos, transform.rotation);
+        float randomX = Random.Range(-5, 5);
+        startPos = new Vector3(randomX, startPos.y, startPos.z);
     }
 }

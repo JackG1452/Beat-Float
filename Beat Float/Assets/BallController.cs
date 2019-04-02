@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 public class BallController : MonoBehaviour
 {
     Rigidbody ball;
@@ -52,6 +53,16 @@ public class BallController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        ball.AddForce(Vector3.up * force);
+ //       if (collision.gameObject.tag == "Platform")
+ //       {
+            ball.AddForce(Vector3.up * force);
+ //       }
+        if(collision.gameObject.tag == "Restart")
+        {
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
+        }
     }
 }
