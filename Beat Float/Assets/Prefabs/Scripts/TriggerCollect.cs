@@ -15,7 +15,7 @@ public class TriggerCollect : MonoBehaviour {
 
 	}
 	
-	private void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player") {
 			Debug.Log ("Item Collected");
@@ -36,7 +36,6 @@ public class TriggerCollect : MonoBehaviour {
 		//ScoreKeeper.instance.SetGemsCollected(gemValue);
 
 		//disable the collider
-		gameObject.GetComponent<Collider2D> ().enabled = false;
 		//disable the renderer
 		gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 

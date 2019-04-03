@@ -25,7 +25,15 @@ public class PlaySong : MonoBehaviour
         {
             song.Play();
             play = true;
-            ball.isKinematic = false;
         }
+        RaycastHit hit;
+        Ray ray = new Ray(ball.position, Vector3.down);
+        if(Physics.Raycast(ray, out hit, 100))
+        {
+            if(hit.collider.tag == "Platform")
+            ball.isKinematic = false;
+
+        }
+        Debug.DrawRay(ball.position + (Vector3.down * 2), Vector3.down*100, Color.blue);
     }
 }

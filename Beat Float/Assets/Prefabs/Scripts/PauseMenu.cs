@@ -8,10 +8,9 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
 
-    void Update()
+    public void PauseFunc()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+     
             if (GameIsPause)
             {
                 Resume();
@@ -21,24 +20,27 @@ public class PauseMenu : MonoBehaviour
                 Pause();
 
             }
-        }
+        
     }
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPause = (false);
+        PlatformSpawner.instance.enabled = true;
+
     }
     void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPause = (true);
+        PlatformSpawner.instance.enabled = false;
     }
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene 1");
     }
 
     public void QuitGame()

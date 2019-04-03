@@ -10,6 +10,8 @@ public class BallController : MonoBehaviour
     public float movement = 10f;
     public float gyroSpeed = 10f;
     private float firstX = 0;
+    private int movingPoints = 30;
+    public bool PlatformHere = false;
     [SerializeField] private float thresholdSpeed = 30f;
 
     // Start is called before the first frame update
@@ -17,12 +19,13 @@ public class BallController : MonoBehaviour
     {
         ball = GetComponent<Rigidbody>();
         Input.gyro.enabled = true;
+
     }
     // Update is called once per frame
     void Update()
     {
         // float rot = Input.gyro.attitude.eulerAngles.magnitude;
-          float hor = Input.acceleration.x;
+        float hor = Input.acceleration.x;
         //ball.velocity = new Vector3(hor * movement, ball.velocity.y, ball.velocity.z);
         Vector3 gyromov = new Vector3(hor, 0, 0);
 
@@ -49,20 +52,43 @@ public class BallController : MonoBehaviour
             firstX = currentX;
         }
 
+        RaycastHit hit;
+        Ray ray = new Ray(ball.position, Vector3.down);
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            if (hit.collider.tag == "Platform")
+            {
+                ball.isKinematic = false;
+            }
+
+
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
- //       if (collision.gameObject.tag == "Platform")
- //       {
-            ball.AddForce(Vector3.up * force);
- //       }
-        if(collision.gameObject.tag == "Restart")
+        //       if (collision.gameObject.tag == "Platform")
+        //       {
+       ball.AddForce(Vector3.up * force);
+        ScoreKeeper.instance.AddScore(1);
+
+        //       }
+        if (collision.gameObject.tag == "Restart")
         {
-            
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
 
         }
+
+
     }
+
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 from, Vector3 middle, Vector3 to)
+    {
+        return Mathf.Pow((1 - t), 2) * transform.position + 2 * (1 - t) * t * middle + Mathf.Pow(t, 2) * to;
+    }
+
+
 }

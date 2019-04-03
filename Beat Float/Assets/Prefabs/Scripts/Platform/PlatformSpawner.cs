@@ -6,21 +6,33 @@ public class PlatformSpawner : MonoBehaviour
 {
     public float bpm = 120f;
     private float lastTime, deltaTime, timer;
-
+    public float randomRange = 5;
 
     public GameObject platformPrefab;
     private GameObject platform;
-
+    private GameObject coin;
+    public GameObject coinPrefab;
     public float spawnTime = 2;
     private float t;
 
     public Vector3 startPos;
+    public static PlatformSpawner instance;
+    bool spawnCoin = false;
 
+    float timeElapsed = 0;
+    float waitTimeForCoin = 0;
+
+    public float minWaitTime, maxWaitTime;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         lastTime = 0f;
         deltaTime = 0f;
         timer = 0f;
+        waitTimeForCoin = Random.Range(minWaitTime, maxWaitTime);
         //SpawnPlatform();
     }
 
@@ -37,6 +49,8 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         lastTime = GetComponent<AudioSource>().time;
+
+        RandomCoinSpawner();
         //t += Time.deltaTime;
         //Debug.Log(t);
         //if (t >= spawnTime)
@@ -49,7 +63,30 @@ public class PlatformSpawner : MonoBehaviour
     {
         //instantiate
         platform = Instantiate(platformPrefab, startPos, transform.rotation);
-        float randomX = Random.Range(-5, 5);
+        if(spawnCoin)
+        {
+            coin = Instantiate(coinPrefab, startPos+(Vector3.up*0.4f), transform.rotation);
+            coin.transform.parent = platform.transform;
+            waitTimeForCoin = Random.Range(minWaitTime, maxWaitTime);
+            spawnCoin = false;
+
+        }
+        float randomX = Random.Range(-randomRange, randomRange);
         startPos = new Vector3(randomX, startPos.y, startPos.z);
+    }
+
+    private void RandomCoinSpawner()
+    {
+
+
+        timeElapsed += Time.deltaTime;
+
+        if(timeElapsed >= waitTimeForCoin)
+        {
+            spawnCoin = true;
+            timeElapsed = 0;
+
+        }
+
     }
 }

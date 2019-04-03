@@ -22,7 +22,7 @@ public class ScoreDisplay : MonoBehaviour {
     void Update()
     {
         GetScore();
-        score.text = "Score: " + scoreValue;
+        score.text = scoreValue.ToString();
 
     }
 }
