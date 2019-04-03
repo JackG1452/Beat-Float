@@ -15,6 +15,7 @@ public class PlatformSpawner : MonoBehaviour
     private float t;
 
     public Vector3 startPos;
+    
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class PlatformSpawner : MonoBehaviour
         //    t = 0;
         //    SpawnPlatform();
         //}
+        
     }
     private void SpawnPlatform()
     {
