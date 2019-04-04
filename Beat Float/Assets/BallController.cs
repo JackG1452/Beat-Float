@@ -13,43 +13,45 @@ public class BallController : MonoBehaviour
     private int movingPoints = 30;
     public bool PlatformHere = false;
     [SerializeField] private float thresholdSpeed = 30f;
-
+    bool allowControls = false;
     // Start is called before the first frame update
     void Start()
     {
         ball = GetComponent<Rigidbody>();
-        Input.gyro.enabled = true;
+        Input.gyro.enabled = false;
 
     }
     // Update is called once per frame
     void Update()
     {
         // float rot = Input.gyro.attitude.eulerAngles.magnitude;
+        if (allowControls) { 
         float hor = Input.acceleration.x;
         //ball.velocity = new Vector3(hor * movement, ball.velocity.y, ball.velocity.z);
         Vector3 gyromov = new Vector3(hor, 0, 0);
 
         ball.transform.Translate(gyromov * gyroSpeed * Time.deltaTime);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            firstX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            float currentX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
-            float amount = Mathf.Abs(Mathf.Abs(currentX) - Mathf.Abs(firstX));
-
-            if (currentX > firstX)
+            if (Input.GetMouseButtonDown(0))
             {
-                transform.position += new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                firstX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
             }
-            else
+            else if (Input.GetMouseButton(0))
             {
-                transform.position -= new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
-            }
+                float currentX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
+                float amount = Mathf.Abs(Mathf.Abs(currentX) - Mathf.Abs(firstX));
 
-            firstX = currentX;
+                if (currentX > firstX)
+                {
+                    transform.position += new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                }
+                else
+                {
+                    transform.position -= new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                }
+
+                firstX = currentX;
+            }
         }
 
         RaycastHit hit;
@@ -58,7 +60,10 @@ public class BallController : MonoBehaviour
         {
             if (hit.collider.tag == "Platform")
             {
+                Input.gyro.enabled = true;
                 ball.isKinematic = false;
+                allowControls = true;
+
             }
 
 
