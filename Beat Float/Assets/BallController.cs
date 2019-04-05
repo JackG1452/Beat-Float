@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BallController : MonoBehaviour
 {
     Rigidbody ball;
+    
     public float force = 2f;
     public float movement = 10f;
     public float gyroSpeed = 10f;
@@ -82,7 +83,7 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.tag == "Restart")
         {
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("GameOver");
 
 
         }
