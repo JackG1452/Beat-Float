@@ -7,7 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("AfterGameOver");
+        Time.timeScale = 1f;
+        PlatformSpawner.instance.enabled = true;
     }
 
 
@@ -15,5 +17,10 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

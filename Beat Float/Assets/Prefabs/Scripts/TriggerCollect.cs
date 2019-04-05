@@ -21,7 +21,7 @@ public class TriggerCollect : MonoBehaviour {
 			Debug.Log ("Item Collected");
 			CollectItem ();
 			CreateParticles ();
-
+            GemCounter.instance.AddGem(gemValue);
 			//find the audiomanager and play the sound
             //Either needs added/changed or deleted completely depends on if we have a collect sound
 			//GameObject.FindWithTag ("AudioManager").GetComponent<AudioManager> ().PlayCollect ();

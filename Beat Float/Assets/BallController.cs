@@ -15,11 +15,13 @@ public class BallController : MonoBehaviour
     public bool PlatformHere = false;
     [SerializeField] private float thresholdSpeed = 30f;
     bool allowControls = false;
+    private ParticleSystem particles;
     // Start is called before the first frame update
     void Start()
     {
         ball = GetComponent<Rigidbody>();
         Input.gyro.enabled = false;
+        
 
     }
     // Update is called once per frame
@@ -82,9 +84,12 @@ public class BallController : MonoBehaviour
         //       }
         if (collision.gameObject.tag == "Restart")
         {
-
+            
+            if(PlayerPrefs.GetInt("score", 0) < ScoreKeeper.instance.score)
+            {
+                PlayerPrefs.SetInt("score", ScoreKeeper.instance.score);
+            }
             SceneManager.LoadScene("GameOver");
-
 
         }
 

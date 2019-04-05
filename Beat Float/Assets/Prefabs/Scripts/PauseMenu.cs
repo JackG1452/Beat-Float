@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPause = false;
     public GameObject pauseMenuUI;
-
+    public GameObject countDown;
     public void PauseFunc()
     {
      
@@ -28,7 +28,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPause = (false);
         PlatformSpawner.instance.enabled = true;
-
+        countDown.SetActive(true);
+        
     }
     void Pause()
     {
@@ -36,11 +37,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPause = (true);
         PlatformSpawner.instance.enabled = false;
+        countDown.SetActive(false);
     }
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("SampleScene 1");
+        SceneManager.LoadScene("Menu");
     }
 
     public void QuitGame()
