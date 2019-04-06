@@ -21,7 +21,15 @@ public class BallController : MonoBehaviour
     {
         ball = GetComponent<Rigidbody>();
         Input.gyro.enabled = false;
-        
+
+        if (ballSelect.instance.getBallSelected() != null)
+        {
+            Instantiate(ballSelect.instance.getBallSelected(), gameObject.transform);
+        }
+        else
+        {
+            gameObject.transform.Find("Electric Ball").gameObject.SetActive(true);
+        }
 
     }
     // Update is called once per frame

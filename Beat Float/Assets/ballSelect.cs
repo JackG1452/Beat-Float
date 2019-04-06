@@ -11,6 +11,20 @@ public class ballSelect : MonoBehaviour
     public  GameObject[] balls;
     private int currentBall = 0;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
     private void Start()
     {
         currentBall = PlayerPrefs.GetInt("ball", 0);
