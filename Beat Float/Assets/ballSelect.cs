@@ -41,6 +41,12 @@ public class ballSelect : MonoBehaviour
         currentBall = 1;
     }
 
+    public void Ball3()
+    {
+        PlayerPrefs.SetInt("ball", 2);
+        currentBall = 2;
+    }
+
     public GameObject getBallSelected()
     {
         return balls[currentBall];
