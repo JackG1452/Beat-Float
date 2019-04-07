@@ -7844,12 +7844,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070084135}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eff2f48be077d244bba19a246a4b8c7, type: 3}
+  m_Script: {fileID: 11500000, guid: d82e325d89e618b48a38d64fc5eeffff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
 --- !u!82 &1070084137
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13909,6 +13908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1942344806}
   countDown: {fileID: 95513230}
+  music: {fileID: 1070084137}
 --- !u!1 &1473098696
 GameObject:
   m_ObjectHideFlags: 0
@@ -15810,7 +15810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1942344806}
-  countDown: {fileID: 95513232}
+  countDown: {fileID: 95513230}
+  music: {fileID: 1070084137}
 --- !u!1 &1956175656
 GameObject:
   m_ObjectHideFlags: 0

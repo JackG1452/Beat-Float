@@ -36,32 +36,39 @@ public class BallController : MonoBehaviour
     void Update()
     {
         // float rot = Input.gyro.attitude.eulerAngles.magnitude;
-        if (allowControls) { 
-        float hor = Input.acceleration.x;
-        //ball.velocity = new Vector3(hor * movement, ball.velocity.y, ball.velocity.z);
-        Vector3 gyromov = new Vector3(hor, 0, 0);
-
-        ball.transform.Translate(gyromov * gyroSpeed * Time.deltaTime);
-
-            if (Input.GetMouseButtonDown(0))
+        if (allowControls)
+        {
+            if (PlayerPrefs.GetInt("controls", 0) == 1)
             {
-                firstX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
+                float hor = Input.acceleration.x;
+                //ball.velocity = new Vector3(hor * movement, ball.velocity.y, ball.velocity.z);
+                Vector3 gyromov = new Vector3(hor, 0, 0);
+
+                ball.transform.Translate(gyromov * gyroSpeed * Time.deltaTime);
+
             }
-            else if (Input.GetMouseButton(0))
+            if (PlayerPrefs.GetInt("controls", 0) == 0)
             {
-                float currentX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
-                float amount = Mathf.Abs(Mathf.Abs(currentX) - Mathf.Abs(firstX));
-
-                if (currentX > firstX)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    transform.position += new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                    firstX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
                 }
-                else
+                else if (Input.GetMouseButton(0))
                 {
-                    transform.position -= new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
-                }
+                    float currentX = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).x;
+                    float amount = Mathf.Abs(Mathf.Abs(currentX) - Mathf.Abs(firstX));
 
-                firstX = currentX;
+                    if (currentX > firstX)
+                    {
+                        transform.position += new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                    }
+                    else
+                    {
+                        transform.position -= new Vector3(amount * thresholdSpeed * Time.deltaTime, 0, 0);
+                    }
+
+                    firstX = currentX;
+                }
             }
         }
 

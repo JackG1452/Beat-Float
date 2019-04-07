@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("AfterGameOver");
         Time.timeScale = 1f;
+        if(PlatformSpawner.instance != null)
         PlatformSpawner.instance.enabled = true;
     }
 
